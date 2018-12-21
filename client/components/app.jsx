@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-class Home extends React.Component {
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -9,4 +8,12 @@ class Home extends React.Component {
             ohs: 0,
         }
     }
+
+    render() {
+        return (
+            <div>Tic Tac Toe</div>
+        )
+    }
 }
+
+export default App;
