@@ -75,7 +75,8 @@ class App extends React.Component {
             <div className="board-container">
               <h1>Tic Tac Toe -- React</h1>
                 <PlayerStatus player={this.state.player} 
-                makePlayer={(e) => this.makePlayer(e)}/>
+                makePlayer={(e) => this.makePlayer(e)}
+                winner={this.state.winner}/>
               <div className="board">
                 {Box}
               </div>

@@ -10,16 +10,16 @@ class PlayerStatus extends React.Component {
     handleWinner() {
         if (this.props.winner) {
            return <h2>Winner is {this.props.player}</h2>
+        } else {
+            return this.props.player ?  
+            <h2>Next: {this.props.player}</h2> : 
+            <Player player={(e) => this.handlePlayer(e)}/>
         }
     }
 
     render() {
         return (
-
-            {handleWinner}
-            this.props.player ?  
-            <h2>Next: {this.props.player}</h2> : 
-            <Player player={(e) => this.handlePlayer(e)}/>
+          <span>{this.handleWinner()}</span>
         )
     }
 }
