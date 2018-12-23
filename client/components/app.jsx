@@ -1,6 +1,7 @@
 import React from 'react';
 import TTTstyling from './style';
 import Player from './player.jsx';
+import PlayerStatus from "./playerStatus.jsx";
 
 
 class App extends React.Component {
@@ -67,16 +68,14 @@ class App extends React.Component {
               onClick = {() => this.handleClick(index)}>{box}</div>
         )
 
-        const playerStatus = this.state.player ?  
-        <h2>Next: {this.state.player}</h2> : 
-        <Player player={(e) => this.makePlayer(e)}/>
 
         return (
             <TTTstyling>
 
             <div className="board-container">
               <h1>Tic Tac Toe -- React</h1>
-                {playerStatus}
+                <PlayerStatus player={this.state.player} 
+                makePlayer={(e) => this.makePlayer(e)}/>
               <div className="board">
                 {Box}
               </div>
