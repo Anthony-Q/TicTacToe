@@ -13,6 +13,7 @@ class App extends React.Component {
             winner : null
         }
         this.handleClick = this.handleClick.bind(this);
+        this.resetBoard = this.resetBoard.bind(this);
     }
 
     checkWinner() {
@@ -60,6 +61,14 @@ class App extends React.Component {
       })
     }
 
+    resetBoard() {
+        this.setState({
+            board : Array(9).fill(null),
+            player : null,
+            winner : null
+        })
+    }
+
     render() {
         const Box = this.state.board.map( 
             (box, index) => 
@@ -77,6 +86,7 @@ class App extends React.Component {
                 <PlayerStatus player={this.state.player} 
                 makePlayer={(e) => this.makePlayer(e)}
                 winner={this.state.winner}/>
+                <button onClick={this.resetBoard}>Reset</button>
               <div className="board">
                 {Box}
               </div>
