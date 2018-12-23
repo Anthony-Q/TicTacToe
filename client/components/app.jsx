@@ -1,32 +1,84 @@
 import React from 'react';
 import TTTstyling from './style';
+import Player from './player.jsx';
 
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ecks: 0,
-            ohs: 0,
+            board : Array(9).fill(null),
+            player : null,
+            winner : null
+        }
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    checkWinner() {
+      const winningLines = [
+          ["0", "1", "2"],
+          ["3", "4", "5"],
+          ["6", "7", "8"],
+          ["0", "3", "6"],
+          ["1", "4", "7"],
+          ["2", "5", "8"],
+          ["0", "4", "8"],
+          ["2", "4", "6"],
+      ]
+
+      for (var index = 0; index < winningLines.length; index++) {
+          const [a, b, c] = winningLines[index];
+         if  (this.state.board[a] &&
+              this.state.board[a] === this.state.board[b] && 
+              this.state.board[a] === this.state.board[c]) {
+                this.setState({
+                    winner: this.state.player
+                })
+            }
         }
     }
 
+    handleClick(index) {
+        if (this.state.player && !this.state.winner) {
+            let newBoard = this.state.board;
+            if (this.state.board[index] === null && !this.state.winner) {
+                newBoard[index] = this.state.player;
+                const newPlayer = this.state.player === "X" ? "O" : "X"
+                this.setState({
+                    board : newBoard,
+                    player: newPlayer
+                })
+                this.checkWinner();
+            } 
+        }
+    }
+
+    makePlayer(player) {
+      this.setState({
+          player : player
+      })
+    }
+
     render() {
+        const Box = this.state.board.map( 
+            (box, index) => 
+              <div className="box" 
+              key = {index}
+              onClick = {() => this.handleClick(index)}>{box}</div>
+        )
+
+        const playerStatus = this.state.player ?  
+        <h2>Next: {this.state.player}</h2> : 
+        <Player player={(e) => this.makePlayer(e)}/>
+
         return (
             <TTTstyling>
 
             <div className="board-container">
               <h1>Tic Tac Toe -- React</h1>
+                {playerStatus}
               <div className="board">
-                <div className="box">x</div>
-                <div className="box">x</div>
-                <div className="box"></div>
-                <div className="box"></div>
-                <div className="box"></div>
-                <div className="box"></div>
-                <div className="box"></div>
-                <div className="box"></div>
-                <div className="box"></div>
+                {Box}
               </div>
             </div>
             </TTTstyling>

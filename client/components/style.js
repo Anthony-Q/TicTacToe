@@ -17,6 +17,7 @@ const TTTstyling = styled.div`
     display: inline-flex;
     flex-wrap: wrap;
     width: 320px;
+    line-height: 100px;
 
 }
 `
